@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+	<!--  <bean id="direccion" class="ejemplo4.Direccion">  este serian singelton -->
+	<bean id="direccion" class="ejemplo4.Direccion" scope="prototype">
+		<property name="nombreVia" value="Gran Via"></property>
+		<property name="tipoVia" value="Calle"></property>
+		<property name="cp" value="28024"></property>
+		<property name="ciudad" value="Madrid"></property>
+	</bean>
+	
+		<!--  no se pueden tener dos bin exactamente iguales,  este serian singelton y deberia 
+		de utilizar byName autowire = "byName"
+	<bean id="direccion2" class="ejemplo4.Direccion">
+		<property name="nombreVia" value="Serrano"></property>
+		<property name="tipoVia" value="Calle"></property>
+		<property name="cp" value="28024"></property>
+		<property name="ciudad" value="Madrid"></property>
+	</bean> -->
+
+	
+	<!-- Autowire es una propiedad de los objetos de spring por el cual hacemos que 
+	se hagan una autoinyeccion de los objetos.Basicamente decimos que a esta 
+	persona intente inyectgar todos los objetos que pueda que estan dados de alta 
+	en el contenedor de spring, buscame algun objeto de tipo direccion en mi contenedor 
+	de spring y si lo hay 	lo inyectas, lo tenemos justo arriba y por lo tanto lo va 
+	a inyectar automaticamente 
+	tambien podemos tener el byName  -->
+	<bean id="persona" class="ejemplo4.Persona" autowire="byType"> 
+		<property name="nombre" value="Bart"></property>
+	</bean>
+		
+	<bean id="persona2" class="ejemplo4.Persona" autowire="byType"> 
+		
+	</bean>
+	
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+ 
+ 	<bean id="pelicula" class="modelo.entidades.Pelicula" scope ="prototype">
+ 		<property name="director" ref="directorBean"></property>
+	 </bean>
+ 
+ 	<bean id="directorBean" class="modelo.entidades.Director" scope ="prototype">
+ 		<property name="edad" value="18"></property>
+ 	</bean>
+ 
+ 	<bean id="listaPeliculas" class="java.util.ArrayList">
+ 	</bean>
+ 	
+ 	<!-- el dao y el gestor solamente hace falta uno, no hace falta prototype -->
+ 	<bean id="daoPelicula" class="modelo.persistencia.DaoPeliculaArray"> 
+ 		<property name="listaPelicula" ref="listaPeliculas"></property>
+ 	</bean>
+ 	
+ 	<bean id="gestorPelicula" class="modelo.negocio.GestorPelicula">
+ 		<property name="daoPelicula" ref="daoPelicula"></property>
+ 	</bean>
+ 
+ 
+</beans>

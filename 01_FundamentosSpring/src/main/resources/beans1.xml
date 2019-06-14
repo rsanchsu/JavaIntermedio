@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--  El alcance por defecto de los objetos en spring son singleton y al menos 
+    tienen que tener un id y tipo de objeto que queremos crear 
+    para que esto funcione la clase tiene que tener el constructor por defecto   -->
+	<bean id="personaSingleton" class="ejemplo1.Persona" scope="singleton">
+	   	 <property name="peso" value="70.00"></property>
+	</bean>
+	<!--  Podemos inicializar objetos mediante inner beans-->
+	<bean id="personaSingleton2" class="ejemplo1.Persona">
+		<property name="nombre" value="Cleopatra"></property>
+		<property name="direccion">
+			<bean class="ejemplo1.Direccion">
+				<property name="nombreVia" value="nilo"></property>
+				<property name="tipoVia" value="rio"></property>
+				<property name="cp" value="23223"></property>
+				<property name="ciudad" value="Egipto"></property>
+			</bean>
+		
+		</property>
+	</bean>
+	
+	<!--  Podemos inicializar objetos mediante referencia -->
+	<bean id="direccion1" class="ejemplo1.Direccion">
+				<property name="nombreVia" value="Diamante"></property>
+				<property name="tipoVia" value="calle"></property>
+				<property name="cp" value="23223"></property>
+				<property name="ciudad" value="Madrid"></property>
+	</bean>
+	<bean id="personaSingleton4" class="ejemplo1.Persona">
+		<property name="nombre" value="Guillermo"></property>
+		<property name="direccion" ref="direccion1"></property>
+	</bean>
+		
+	<!-- pordemos inicilizar por argumentos  -->
+	<bean id="personaSingleton3" class="ejemplo1.Persona">
+		<constructor-arg value="Cesar"></constructor-arg>
+		<constructor-arg value="45"></constructor-arg>
+		<constructor-arg value="79.00"></constructor-arg>
+	</bean>
+	
+	<bean id="personaPrototype" class="ejemplo1.Persona" scope="prototype">
+	<!-- podemos inicializar los objetos del property, ahora la persona 2 ya tiene valor 	 -->
+	 <property name="nombre" value="Napoleon"></property>
+	 <property name="edad" value="80"></property>
+ 	 <property name="peso" value="60.25"></property>
+	</bean>
+	
+	<bean id="listaPersonas" class="java.util.ArrayList" scope="singleton"> 
+	</bean>
+</beans>
